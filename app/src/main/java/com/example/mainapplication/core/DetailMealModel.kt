@@ -5,6 +5,7 @@ import java.io.Serializable
 
 data class DetailMealModel (
     @SerializedName("strMeal") val strMeal: String,
+    @SerializedName("strYoutube") val strYoutube: String,
     @SerializedName("strIngredient1") val strIngredient1: String?,
     @SerializedName("strIngredient2") val strIngredient2: String?,
     @SerializedName("strIngredient3") val strIngredient3: String?,

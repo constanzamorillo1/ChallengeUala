@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MainApplication</string>
     <string name="app_search_view_label">Insert meal to search</string>
+    <string name="app_label_ingredients">Ingredients: </string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.mainapplication
+package com.example.mainapplication.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mainapplication.R
 import com.example.mainapplication.domain.MealsRepository
+import com.example.mainapplication.ui.detail.DetailMealActivity
 import com.example.mainapplication.utils.ClickListener
 import com.example.mainapplication.utils.MealsAdapter
+import com.example.mainapplication.utils.State
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObservers() {
         mealViewModel.meals.observe(this, Observer {
             when(val state = it) {
-                is State.SuccessState -> {
+                is State.MealSuccessState -> {
                     mealsAdapter.updateData(state.value.meals)
                 }
             }

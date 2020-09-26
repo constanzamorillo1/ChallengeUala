@@ -1,11 +1,11 @@
-package com.example.mainapplication
+package com.example.mainapplication.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mainapplication.core.MealsResponse
 import com.example.mainapplication.domain.MealsRepository
 import com.example.mainapplication.domain.RepositoryResult
+import com.example.mainapplication.utils.State
 
 class MealsViewModel(private val repository: MealsRepository) : ViewModel() {
 
@@ -27,7 +27,7 @@ class MealsViewModel(private val repository: MealsRepository) : ViewModel() {
         repository.getMeals(s) {
             when(val response = it) {
                 is RepositoryResult.Success -> {
-                    _meals.postValue(State.SuccessState(response.value))
+                    _meals.postValue(State.MealSuccessState(response.value))
                 }
                 is RepositoryResult.ErrorWithCode -> {
                     _error.postValue(State.ErrorState(response.statusCode))
@@ -36,15 +36,4 @@ class MealsViewModel(private val repository: MealsRepository) : ViewModel() {
             _loading.postValue(State.Loading.Hide)
         }
     }
-}
-
-sealed class State {
-
-    sealed class Loading : State() {
-        object Show: Loading()
-        object Hide : Loading()
-    }
-
-    data class SuccessState(val value: MealsResponse) : State()
-    data class ErrorState(val code: Int?) : State()
 }
