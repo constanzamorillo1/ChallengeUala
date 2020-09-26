@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">MainApplication</string>
-
-    <string name="app_search_view_label">Inserte plato a buscar</string>
+    <string name="app_search_view_label">Insert meal to search</string>
 </resources>
