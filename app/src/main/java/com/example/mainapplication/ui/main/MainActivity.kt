@@ -14,6 +14,7 @@ import com.example.mainapplication.ui.detail.DetailMealActivity
 import com.example.mainapplication.utils.ClickListener
 import com.example.mainapplication.utils.MealsAdapter
 import com.example.mainapplication.utils.State
+import com.example.mainapplication.utils.makeViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mealViewModel = ViewModelProvider(this, ViewModelFactory(MealsRepository())).get(MealsViewModel::class.java)
+        mealViewModel = makeViewModel(MealsViewModel.factory())
         init()
     }
 

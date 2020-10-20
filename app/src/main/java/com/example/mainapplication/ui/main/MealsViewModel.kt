@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mainapplication.domain.MealsRepository
 import com.example.mainapplication.domain.RepositoryResult
 import com.example.mainapplication.utils.State
+import com.example.mainapplication.utils.viewModelFactory
 
 class MealsViewModel(private val repository: MealsRepository) : ViewModel() {
 
@@ -21,6 +22,12 @@ class MealsViewModel(private val repository: MealsRepository) : ViewModel() {
 
     val error: LiveData<State>
         get() = _error
+
+    companion object {
+        fun factory() = viewModelFactory {
+            MealsViewModel(MealsRepository())
+        }
+    }
 
     fun getMeals(s: String) {
         _loading.postValue(State.Loading.Show)

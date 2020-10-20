@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -51,13 +52,17 @@ class DetailMealActivity : AppCompatActivity() {
     private fun setIngredient(model: DetailMealModel) {
         textName.text = "Name: ${model.strMeal}"
 
-        textVideo.text = "Youtube: ${model.strYoutube}"
-        textVideo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(model.strYoutube)
-            intent.setPackage("com.google.android.youtube")
-            startActivity(intent)
+        if (model.strYoutube.isNotEmpty()) {
+            textVideo.text = "Youtube: ${model.strYoutube}"
+            textVideo.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(model.strYoutube)
+                intent.setPackage("com.google.android.youtube")
+                startActivity(intent)
+            }
         }
+
+        textIngredients.visibility = View.VISIBLE
 
         model.strIngredient1?.let {
             val textView = TextView(this).apply {
