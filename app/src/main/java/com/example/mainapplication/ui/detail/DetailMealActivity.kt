@@ -13,6 +13,7 @@ import com.example.mainapplication.R
 import com.example.mainapplication.core.DetailMealModel
 import com.example.mainapplication.domain.DetailRepository
 import com.example.mainapplication.utils.State
+import com.example.mainapplication.utils.makeViewModel
 import kotlinx.android.synthetic.main.activity_detail_meal.*
 
 class DetailMealActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class DetailMealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_meal)
 
-        viewModel = ViewModelProvider(this, DetailViewModelFactory(DetailRepository())).get(DetailViewModel::class.java)
+        viewModel = makeViewModel(DetailViewModel.factory())
         val i = intent.getStringExtra(ID)
         i?.let {
             viewModel.getDetailMeal(it)

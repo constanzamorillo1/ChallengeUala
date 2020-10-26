@@ -11,11 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mainapplication.R
 import com.example.mainapplication.domain.MealsRepository
 import com.example.mainapplication.ui.detail.DetailMealActivity
-import com.example.mainapplication.utils.ClickListener
-import com.example.mainapplication.utils.MealsAdapter
-import com.example.mainapplication.utils.State
-import com.example.mainapplication.utils.makeViewModel
+import com.example.mainapplication.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,19 +33,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setComponents() {
-        searchText.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { text ->
-                    if (text.isNotEmpty()) {
-                        mealViewModel.getMeals(text)
-                    } else
-                        mealsAdapter.updateData(emptyList())
-                }
-                return false
+        searchText.setOnQueryTextListener(DebouncingQueryTextListener { text ->
+            text?.let {
+                if (text.isNotEmpty()) {
+                    mealViewModel.getMeals(text)
+                } else
+                    mealsAdapter.updateData(emptyList())
             }
         })
         mealsAdapter = MealsAdapter(emptyList())

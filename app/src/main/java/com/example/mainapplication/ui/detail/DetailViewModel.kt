@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mainapplication.domain.DetailRepository
+import com.example.mainapplication.domain.MealsRepository
 import com.example.mainapplication.domain.RepositoryResult
+import com.example.mainapplication.ui.main.MealsViewModel
 import com.example.mainapplication.utils.State
+import com.example.mainapplication.utils.viewModelFactory
 
 class DetailViewModel(private val repository: DetailRepository): ViewModel() {
 
@@ -14,6 +17,12 @@ class DetailViewModel(private val repository: DetailRepository): ViewModel() {
 
     val meal: LiveData<State>
         get() = _meal
+
+    companion object {
+        fun factory() = viewModelFactory {
+            DetailViewModel(DetailRepository())
+        }
+    }
 
     fun getDetailMeal(i: String) {
         repository.getDetailMeal(i) {
