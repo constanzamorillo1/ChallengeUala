@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
-
         recyclerMeals.adapter = mealsAdapter
         recyclerMeals.layoutManager = LinearLayoutManager(this)
         recyclerMeals.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
